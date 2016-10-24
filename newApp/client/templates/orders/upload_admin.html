@@ -1,0 +1,21 @@
+<template name="uploadAdmin">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Upload Publisher Catalog</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {{#unless uploading}}
+          <input type="file" name="uploadPublisherCatalogCSV">
+        {{else}}
+          <p>
+            <i class="fa fa-spin fa-refresh"></i>
+            Uploading File....
+          </p>
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+</template>

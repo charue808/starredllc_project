@@ -19,7 +19,7 @@ Template.publisher.events({
 
 				let fileName = event.target.files[0].name.replace(/\.[^/.]+$/, "");
 				console.log(fileName);
-
+        
 				Meteor.call('parseUpload', results.data, fileName, ( error, response) => {
 					if ( error ) {
 						console.log( error.reason );

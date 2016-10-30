@@ -7,8 +7,16 @@ FlowRouter.route('/', {
 
 
 FlowRouter.route('/create-order', {
-  name: 'layout',
+  name: 'create-order',
   action() {
     BlazeLayout.render('layout', { content: 'createOrder'})
+  }
+});
+
+
+FlowRouter.route('/edit-order', {
+  name: 'edit-order',
+  action() {
+    BlazeLayout.render('layout', { content: 'editOrder'})
   }
 });

@@ -1,24 +1,16 @@
-// selected publisher name switches routes to edit order page
-// 
-
-
-
 Template.createOrder.events({
 // Selecting a publisher and then selecting next presents user with build order page
   // Next button event
   'click #next'(event) {
 
-    // select function
-
-
     // Find the select element with value of publisher name
     let selected = $("#publisherList option:selected").val();
     console.log("the publisher you selected is: " , selected);
+    // throw error if user clicks next and no value has been selected
+    
+   
+    // Route to edit order context set template with parameter of publisherId
 
-    // Create Order Collection Document with publisher name, created date and order number
-
-
-    // Route to build order template with parameter of publisher and order status
   }
 });
 

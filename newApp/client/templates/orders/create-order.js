@@ -3,13 +3,19 @@ Template.createOrder.events({
   // Next button event
   'click #next'(event) {
 
-    // Find the select element with value of publisher name
-    let selected = $("#publisherList option:selected").val();
-    console.log("the publisher you selected is: " , selected);
+    let publisher = document.getElementById('publisherList');
     // throw error if user clicks next and no value has been selected
-    
-   
-    // Route to edit order context set template with parameter of publisherId
+    if( publisher.selectedIndex == 0 ) {
+      // throw error
+      Bert.alert('Please select a publisher!', 'danger', 'growl-top-right');
+    } else {
+      let selectedPublisher = $('#publisherList').val();
+      //console.log("did you forget, the publisher you selected is:", selectedPublisher);
+      const publisherId = selectedPublisher;
+      // Route to edit order contexts
+      FlowRouter.go('edit-order', {_id: publisherId});
+      // set template with parameter of publisherId
+    }
 
   }
 });

@@ -1,30 +1,28 @@
-<template name="editOrder">
+<template name="editOrderContextSet">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Edit Your Order</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <!-- division between h1 and filter/search tools containing order number. -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <!-- sort tools -->
-      </div>
-      <div class="col-md-12">
-        <!-- search bar -->
-      </div>
+    {{#with context}}
+      {{> Template.dynamic template="editOrder"}}
+    {{/with}}
+  </div>
+</template>
+
+<template name="editOrder">
+  <div class="row">
+    <div class="col-md-12">
+     <h1>Edit Your Order</h1>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <!-- display data table  -->
+  <div class="row">
+   <div class="col-md-12">
+     <!-- division between h1 and filter/search tools containing order number. -->
+   </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- sort tools -->
     </div>
-    <div class="row">
-      <!-- proceed to invoice button -->
+    <div class="col-md-12">
+      <!-- search bar -->
     </div>
   </div>
 </template>

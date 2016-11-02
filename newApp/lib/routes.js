@@ -14,9 +14,9 @@ FlowRouter.route('/create-order', {
 });
 
 
-FlowRouter.route('/edit-order/:_id', {
+FlowRouter.route('/edit-order', {
   name: 'edit-order',
-  action() {
-    BlazeLayout.render('layout', { content: 'editOrder'})
+  action(params, queryParams) {
+    BlazeLayout.render('layout', { content: 'editOrderContextSet'})
   }
 });

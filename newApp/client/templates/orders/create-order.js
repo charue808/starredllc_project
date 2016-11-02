@@ -13,7 +13,10 @@ Template.createOrder.events({
       //console.log("did you forget, the publisher you selected is:", selectedPublisher);
       const publisherId = selectedPublisher;
       // Route to edit order contexts
-      FlowRouter.go('edit-order', {_id: publisherId});
+      // Example: FlowRouter.go('/blog/my-post?comments=on&color=dark');
+
+      //FlowRouter.go('/blog/my-post?comments=on&color=dark');
+      FlowRouter.go('/edit-order?publisherId='+publisherId);
       // set template with parameter of publisherId
     }
 

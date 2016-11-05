@@ -1,6 +1,6 @@
 <template name="editOrderContextSet">
   <div class="container">
-    {{#with context}}
+    {{#with orderContext}}
       {{> Template.dynamic template="editOrder"}}
     {{/with}}
   </div>
@@ -10,6 +10,9 @@
   <div class="row">
     <div class="col-md-12">
      <h1>Edit Your Order</h1>
+     <p>
+       {{status}}
+     </p>
     </div>
   </div>
   <div class="row">

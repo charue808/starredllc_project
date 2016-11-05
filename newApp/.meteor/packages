@@ -31,3 +31,5 @@ themeteorchef:bert
 check@1.2.4
 arillo:flow-router-helpers
 session
+aldeed:tabular
+momentjs:moment

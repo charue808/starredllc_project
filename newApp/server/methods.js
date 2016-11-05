@@ -1,108 +1,3 @@
-Catalogs = new Mongo.Collection('catalogs');
-
-Catalogs.schema = new SimpleSchema({
-  publisher: {
-    type: String
-  },
-  title: {
-    type: String,
-    optional: true
-  },
-  series: {
-    type: String,
-    optional: true
-  },
-  isbn: {
-    type: String,
-    optional: true
-  },
-  qty: {
-    type: String,
-    optional: true
-  },
-  copyright: {
-    type: String,
-    optional: true
-  },
-  listPrice: {
-    type: String,
-    optional: true
-  },
-  yourPrice: {
-    type: String,
-    optional: true
-  },
-  interestLvl: {
-    type: String,
-    optional: true
-  },
-  readingLvl: {
-    type: String,
-    optional: true
-  },
-  guidedReading: {
-    type: String,
-    optional: true
-  },
-  atos: {
-    type: String,
-    optional: true
-  },
-  lexile: {
-    type: String,
-    optional: true
-  },
-  titleDewey: {
-    type: String,
-    optional: true
-  },
-  seriesDewey: {
-    type: String,
-    optional: true
-  },
-  numberOfBooks: {
-    type: String,
-    optional: true
-  },
-  author: {
-    type: String,
-    optional: true
-  },
-  subject: {
-    type: String,
-    optional: true
-  }
-});
-Catalogs.attachSchema(Catalogs.schema);
-
-
-// Code attempt using some examples from stackoverflow
-TabularTables = {};
-Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
-
-TabularTables.Catalogs = new Tabular.Table({
-  name: "Catalogs",
-  collection: Catalogs,
-  columns: [
-    {data: "title", title: "Title"},
-    {data: "series", title: "Series"},
-    {data: "isbn", title: "ISBN"},
-    {data: "listPrice", title: "List Price"},
-    {data: "yourPrice", title: "Your Price"},
-    {data: "interestLvl", title: "Interest Level"},
-    {data: "readingLvl", title: "Reading Level"},
-    {data: "guidedReading", title: "Guided Reading Level"},
-    {data: "atos", title: "ATOS"},
-    {data: "lexile", title: "Lexile"},
-    {data: "author", title: "Author"},
-    {data: "copyright", title: "Copyright"}
-  ]
-
-});
-
-
-// Moved method to server/methods.js
-/*
 Meteor.methods({
   parseUpload( data, fileName ) {
     check( data, Array );
@@ -225,24 +120,23 @@ Meteor.methods({
       //console.log("bookToInsertStructure is: ", bookToInsertStructure);
 
       let structuredBook = getStructuredBook(unstructuredBook, bookToInsertStructure);
-      console.log("The UNstructured book is:", unstructuredBook);
-      console.log("The structured book is:", structuredBook);
+      //console.log("The UNstructured book is:", unstructuredBook);
+      //console.log("The structured book is:", structuredBook);
 
       // TODO: (Use extend?)  Add the publisher name before insert
       //
       let completeBook = _.extend(structuredBook, {
         publisher: fileName
       });
-      console.log("My isbn is: ", completeBook.isbn );
+      //console.log("My isbn is: ", completeBook.isbn );
       // if there is a non empty string in the isbn field then insert completeBook
       //
       if ( completeBook.isbn ) {
         var insertedBookId = Catalogs.insert(completeBook);
-        console.log(Catalogs.findOne(insertedBookId));
+        //console.log(Catalogs.findOne(insertedBookId));
       } else {
         console.warn( 'Rejected. Invalid Entry.' );
       }
     }
   }
 });
-*/

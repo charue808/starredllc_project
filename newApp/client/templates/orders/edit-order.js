@@ -2,19 +2,17 @@
 
 Template.editOrderContextSet.onRendered(function() {
 
-  Session.set('orderContext', {"id": "12345", "status":"pending"});
+  // Load session variable with (sample) order from Order collection
+  //
+  let publisherId = FlowRouter.getQueryParam("publisherId");
+
+  Session.set('setOrder', {"publisherName":publisherId, "_id":"", "status": "pending"});
+  console.log("This is my  order detail: ", Session.get('setOrder'));
 });
 
 Template.editOrderContextSet.helpers({
   orderContext() {
-   var orderObject =  Session.get('orderContext');
-   console.log(orderObject);
-   return orderObject;
+   return Session.get('setOrder');
   }
 });
 
-Template.editOrder.helpers({
-  status() {
-    return Session.get('orderContext');
-  }
-})

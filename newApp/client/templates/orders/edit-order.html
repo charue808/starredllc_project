@@ -1,5 +1,7 @@
 <template name="editOrderContextSet">
   <div class="container">
+    <!-- Provide editOrder template with context, which comes
+         directly from order document from Orders collection -->
     {{#with orderContext}}
       {{> Template.dynamic template="editOrder"}}
     {{/with}}
@@ -10,9 +12,9 @@
   <div class="row">
     <div class="col-md-12">
      <h1>Edit Your Order</h1>
-     <p>
-       {{status}}
-     </p>
+      {{publisherName}}
+      {{_id}}
+      {{status}}
     </div>
   </div>
   <div class="row">

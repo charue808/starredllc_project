@@ -1,4 +1,7 @@
-Catalogs = new Mongo.Collection('catalogs');
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const Catalogs = new Mongo.Collection('catalogs');
 
 Catalogs.schema = new SimpleSchema({
   publisher: {
@@ -75,7 +78,7 @@ Catalogs.schema = new SimpleSchema({
 });
 Catalogs.attachSchema(Catalogs.schema);
 
-
+/*
 // Code attempt using some examples from stackoverflow
 TabularTables = {};
 Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
@@ -99,7 +102,7 @@ TabularTables.Catalogs = new Tabular.Table({
   ]
 
 });
-
+*/
 
 // Moved method to server/methods.js
 /*

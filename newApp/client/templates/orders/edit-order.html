@@ -1,5 +1,5 @@
 <template name="editOrderContextSet">
-  <div class="container">
+  <div class="container-fluid">
     <!-- Provide editOrder template with context, which comes
          directly from order document from Orders collection -->
     {{#with orderContext}}
@@ -30,8 +30,8 @@
       <!-- search bar -->
     </div>
   </div>
-  <div class="container">
-    {{> tabular table=TabularTables.Catalogs selector=selector class="table table-striped table-bordered table-condensed"}}
+  <div class="container-fluid">
+    {{> tabular table=TabularTables.Catalogs selector=selector class="table table-striped table-bordered" cellspacing="0" width="100%"}}
   </div>
 </template>
 

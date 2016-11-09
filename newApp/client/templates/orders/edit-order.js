@@ -3,6 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+
+import { $ } from 'meteor/jquery';
+import dataTablesBootstrap from 'datatables.net-bs';
+import 'datatables.net-bs/css/dataTables.bootstrap.css';
+dataTablesBootstrap(window, $);
+
 import '/lib/common.js';
 import './edit-order.html';
 

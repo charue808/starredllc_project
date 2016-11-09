@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Catalogs } from '../lib/collections/catalogs.js';
+
 Meteor.methods({
   parseUpload( data, fileName ) {
     check( data, Array );

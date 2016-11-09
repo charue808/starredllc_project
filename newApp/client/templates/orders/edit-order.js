@@ -24,3 +24,8 @@ Template.editOrderContextSet.helpers({
   }
 });
 
+Template.editOrder.helpers({
+  selector() {
+    return {publisher: Session.get('setOrder').publisherName};
+  }
+});

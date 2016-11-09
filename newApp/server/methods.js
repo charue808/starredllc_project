@@ -136,7 +136,7 @@ Meteor.methods({
       //
       if ( completeBook.isbn ) {
         var insertedBookId = Catalogs.insert(completeBook);
-        //console.log(Catalogs.findOne(insertedBookId));
+        console.log(Catalogs.findOne(insertedBookId));
       } else {
         console.warn( 'Rejected. Invalid Entry.' );
       }

@@ -11,8 +11,8 @@ new Tabular.Table({
   name: "Catalogs",
   collection: Catalogs,
   columns: [
-    {data: "isbn", title: "ISBN"},
-    {data: "title", title: "Title"},
+    {data: "isbn", title: "ISBN", width:"250px"},
+    {data: "title", title: "Title", width:"250px"},
     {data: "copyright", title: "Copyright"},
     {data: "listPrice", title: "List Price"},
     {data: "yourPrice", title: "Your Price"},

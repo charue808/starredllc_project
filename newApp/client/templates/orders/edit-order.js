@@ -35,3 +35,14 @@ Template.editOrder.helpers({
     return {publisher: Session.get('setOrder').publisherName};
   }
 });
+
+// User can add/update quantity of items added to order
+Template.addQTYCell.events({
+  // click update order button
+  'click #addQty': function() {
+    // Create order document with orderId in Order collection
+    // Get data from table row that button is in
+    // orderItem object with row data
+    // insert orderItem into order document
+  }
+});

@@ -19,10 +19,6 @@ Catalogs.schema = new SimpleSchema({
     type: String,
     optional: true
   },
-  qty: {
-    type: String,
-    optional: true
-  },
   copyright: {
     type: String,
     optional: true

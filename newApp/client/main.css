@@ -26,3 +26,15 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
+
+.mb {
+  margin-bottom: 25px;
+}
+
+.mt {
+  margin-top: 20px;
+}
+
+#saveOrderBtn {
+  float:right;
+}

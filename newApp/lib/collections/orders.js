@@ -8,3 +8,24 @@
 // An order would take the following form:
 // capstoneOrder = {publisherId: "capstone", orderId: "9u823hof9y32", orderDetails:[{isbn:'978-1-4914-8773-0', qty:2}, {isbn:'433-1-9888-8773-0', qty:12}]}
 // lernerOrder = {publisherId: "lerner", orderId: "8p82382h9y32", orderDetails:[{isbn:'787-1-4914-8773-0', qty:6}]}
+
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const Orders = new Mongo.Collection('orders');
+/*
+Orders.schema = new SimpleSchema({
+  publisherId: {
+    type: String
+  },
+  orderId: {
+    type: String
+  },
+  status: {
+    type: String
+  },
+  orderDetails: {
+    type: [Object]
+  }
+});
+*/

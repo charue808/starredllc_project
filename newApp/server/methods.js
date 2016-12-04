@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Catalogs } from '../lib/collections/catalogs.js';
+import { Orders } from '../lib/collections/orders.js';
 
 Meteor.methods({
   parseUpload( data, fileName ) {
@@ -16,7 +17,6 @@ Meteor.methods({
         "isbn": "ISBN-13",
         "title":"Title",
         "series": "Series",
-        "qty": "Quantity Ordered",
         "listPrice": "List Price",
         "yourPrice": "Your Price",
         "copyright": "Copyright",
@@ -25,7 +25,6 @@ Meteor.methods({
       };
 
       const bearportfieldMap = {
-        "qty": "Quantity Ordered",
         "title": "Title",
         "series": "Series",
         "numberOfBooks": "Number of books",
@@ -43,7 +42,6 @@ Meteor.methods({
       };
 
       const lernerfieldMap = {
-        "qty": "QTY Ordered",
         "series": "Series",
         "title": "Title",
         "isbn": "ISBN",
@@ -62,7 +60,6 @@ Meteor.methods({
       };
 
       const salemfieldMap = {
-        "qty": "QTY Ordered",
         "copyright": "Copyright",
         "isbn": "ISBN",
         "listPrice": "List Price",
@@ -141,5 +138,18 @@ Meteor.methods({
         console.warn( 'Rejected. Invalid Entry.' );
       }
     }
+  },
+
+  createOrder(pubId, bksOrdered) {
+    Orders.upsert({
+      status:"In progress",
+      publisherId: pubId,
+    }, {
+      publisherId: pubId,
+      status: "In progress",
+      submitted: new Date(),
+      booksOrdered: bksOrdered
+    });
   }
+
 });

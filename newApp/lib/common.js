@@ -13,16 +13,16 @@ new Tabular.Table({
   columns: [
     {data: "isbn", title: "ISBN", width:"10%"},
     {data: "title", title: "Title", width:"25%"},
-    {data: "series", title: "Series", width: "15%"},
+    {data: "series", title: "Series", width: "20%"},
     {data: "copyright", title: "Copyright", width:"5%"},
     {data: "atos", title:"ATOS", width:"5%"},
     {data: "lexile", title:"Lexile", width: "5%"},
-    {data: "guidedReading", title:"Guided Reading", width:"5%"},
-    {data: "listPrice", title: "List Price", width:"5%"},
-    {data: "yourPrice", title: "Your Price", width:"5%"},
-    {title: "Quantity", tmpl: Meteor.isClient && Template.inputQTYCell, width:"5%"},
-    {tmpl: Meteor.isClient && Template.addQTYCell, width:"5%"}
+    {data: "guidedReading", title:"Guided Reading", width:"10%"},
+    {data: "listPrice", title: "List Price", width:"10%"},
+    {data: "yourPrice", title: "Your Price", width:"10%"},
+    {title: "Quantity", tmpl: Meteor.isClient && Template.addQTYCell, width:"15%"}
   ],
+  stateSave: true,
   responsive: true,
   autoWidth: false,
   search: {

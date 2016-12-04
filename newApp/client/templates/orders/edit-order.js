@@ -83,11 +83,12 @@ Template.editOrder.helpers({
 Template.editOrder.events({
   'click #saveOrderBtn': function() {
     console.log("clicked");
-    Meteor.call('createOrder', publisherIdTemp, booksOrderedTemp, (error, response)=>{
+    Meteor.call('createOrder', publisherIdTemp, booksOrderedTemp, (error, response) => {
       if (error) {
         console.log("what is the error:", error)
       } else {
         console.log("Success", response)
+        Bert.alert('Your order has been saved!', 'success', 'fixed-bottom');
       }
     });
   }

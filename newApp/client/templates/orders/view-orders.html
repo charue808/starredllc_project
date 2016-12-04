@@ -1,0 +1,25 @@
+<template name="viewOrders">
+  <div class="container-fluid">
+    <div class="row mb">
+      <div class="col-md-12">
+        <h1>View Your Orders</h1>
+      </div>
+    </div>
+    {{#each ordersInProgress}}
+      {{> orderItem}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="orderItem">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{publisherId}}</h2>
+      <p>
+        {{status}}
+        {{submitted}}
+        <button class="btn btn-primary" id="editOrderBtn">Edit Order</button>
+      </p>
+    </div>
+  </div>
+</template>

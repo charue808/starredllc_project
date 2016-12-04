@@ -20,3 +20,10 @@ FlowRouter.route('/edit-order', {
     BlazeLayout.render('layout', { content: 'editOrderContextSet'})
   }
 });
+
+FlowRouter.route('/view-orders', {
+  name: 'view-orders',
+  action() {
+    BlazeLayout.render('layout', { content: 'viewOrders' })
+  }
+});

@@ -11,7 +11,7 @@ Template.createOrder.events({
     } else {
       let selectedPublisher = $('#publisherList').val();
       //console.log("did you forget, the publisher you selected is:", selectedPublisher);
-      const publisherId = selectedPublisher;
+      let publisherId = selectedPublisher;
       // Route to edit order contexts
       // Example: FlowRouter.go('/blog/my-post?comments=on&color=dark');
 

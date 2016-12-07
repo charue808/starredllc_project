@@ -5,6 +5,9 @@
         <h1>View Your Orders</h1>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <h2>In Progress</h2>
     {{#each ordersInProgress}}
       {{> orderItem}}
     {{/each}}
@@ -12,13 +15,15 @@
 </template>
 
 <template name="orderItem">
-  <div class="row">
+  <div class="row order">
     <div class="col-md-12">
-      <h2>{{publisherId}}</h2>
+      <h3 id="publisherName">{{publisherId}}</h3>
       <p>
-        {{status}}
-        {{submitted}}
+        Last updated on: {{submitted}}
         <button class="btn btn-primary" id="editOrderBtn">Edit Order</button>
+      </p>
+      <p>
+        Total Books Ordered: <b>{{totalQty}}</b> / Total List Price: <b>{{totalListPrice}}</b>
       </p>
     </div>
   </div>

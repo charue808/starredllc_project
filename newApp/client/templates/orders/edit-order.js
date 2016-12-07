@@ -20,7 +20,7 @@ import './edit-order.html';
   var booksOrderedTemp = {};
   var currentOrder;
   var publisherIdTemp;
-
+/*
 // Set Context for orderId
 Template.editOrderContextSet.onRendered(function() {
 

@@ -104,25 +104,6 @@ Template.addQTYCell.helpers({
       return booksOrderedTemp[bookId].qty;
     }
 
-
-    /*
-    booksOrderTemp[this._id]
-    bookId = booksOrderTemp
-X    booksOrderTemp[_id] --> '3489uejiofoias'
-    bookId = this._id;
-    booksOrderTemp[this._id].qty
-    booksOrderTemp['3489uejiofoias'] --> {id:"jasjsjs", title:"cat in the hat",
-    the underscore id property of the object in booksOrderTemp is that equivalent to javascript this._id
-     qty:4}
-     booksOrderdTemp = {
-     '3489uejiofoias':{
-        _id: '3489uejiofoias',
-        title: 'cat in the hat',
-        ....,
-      }
-    }
-
-    */
   }
 });
 
@@ -140,79 +121,32 @@ Template.addQTYCell.events({
     bookDetail.qty = inputBoxQty;
     console.log("Row Data is:", bookDetail);
     //booksOrdered = bookDetail[this._id];
-    console.log()
+    let qty = bookDetail.qty;
+    let price = bookDetail.listPrice;
+    console.log("the price for this for is", price);
+    let numPrice = price.replace(/[^0-9\.]+/g, "");
+    console.log("this is the list price with out string", numPrice);
+    let bookTotal = Number(qty) * Number(numPrice);
+    console.log("this is the result of qty and listPrice", bookTotal);
+    console.log("this is the book total to add:", bookTotal);
+    bookDetail.netTotal = bookTotal.toFixed(2);
 
     booksOrderedTemp[this._id] = bookDetail;
     console.log("these are the books ordered", booksOrderedTemp);
   }
+});
 
-/*
-  // click update order button
-  'click .addQtyBtn': function() {
+Template.rowTotalCell.helpers({
+  rowTotal() {
+    let bookId = this._id;
+    let currentBook = booksOrderedTemp[bookId];
 
-    // Add inputBoxQTY to qty property for currentOrderDetail Object
-    //
-    var inputBoxSelector = "#qtyEntered-" + this._id;
-    var inputBoxQty = $(inputBoxSelector).val();
-    console.log("Quantity Entered is: ", inputBoxQty);
+    if (currentBook) {
+      console.log("the total for this book is:", currentBook.netTotal);
+      let num = booksOrderedTemp[bookId].netTotal;
+      let total = '$' + num;
+      return total;
+    }
 
-    let bookDetail = Catalogs.findOne(this._id);
-    console.log("Row Data is:", bookDetail);
-
-    bookDetail.qty = inputBoxQty;
-    // Get data from table row that button is in
-    //
-    //var currentOrderDetail =  Catalogs.findOne(this._id) ;
-    //orderDetail.qty = // Grab from the input box;
-    //orderDetails.push(orderDetail);
-    let currentOrder = Session.get('currentOrderSessionVar');
-    currentOrder.status = "In Progress";
-    currentOrder.bookDetails[bookDetail._id] = bookDetail;
-    console.log("This is the current order data:", currentOrder);
-    let currentOrderId = Session.get('currentOrderIdSessionVar'); //Session.get()
-
-    // Create order document with orderId in Order collection
-    //
-    console.log("Current Order Id is... ", currentOrderId);
-    //only insert an order documents with an ID
-    //let upsertReturnValue = Orders.upsert({_id:currentOrderId});
-    let upsertReturnValue = Orders.upsert({_id:currentOrderId}, {$set: {currentOrder}});
-*/
-
-/*
-    {$set: {"currentOrder.bookDetails": {id: "_id"} }}
-    {$set: {"jerjoierojf": { name: "xyz", qty: 3 }, "jkldjkle": { name: "xyz", qty: 3 } }}
-*/
-    // Update the order id field of our Order session variable
-    //
-/*
-if(!Session.get('currentOrderIdSessionVar')) {
-    Session.set('currentOrderIdSessionVar', upsertReturnValue.insertedId);
   }
-
-    console.log("upsert returns...", upsertReturnValue);
-
-    let orderFetch = Orders.find().fetch();
-    console.log("These are all the orders so far:", orderFetch);
-
-    let bodsUpsertReturnValue = BookOrderDetails.insert({
-      orderId: currentOrderId,
-      submitted: new Date(),
-      order: currentOrder,
-    });
-
-    console.log("book details upsert returns...", bodsUpsertReturnValue);
-
-    let bodsFetch = BookOrderDetails.find().fetch();
-    console.log("These are the books that were ordered:", bodsFetch);
-
-    // On the first
-    // orderDetail object with row data
-    // insert orderItem into orssder document
-    //Orders.upsert({
-      //publisherId: publisherName,
-      //status: "pending"
-    //},{publisherId: publisherName, status: "pending", orderDetails:currentOrderDetails})
-
-  }*/
 });

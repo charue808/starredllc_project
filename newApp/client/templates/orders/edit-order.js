@@ -150,3 +150,7 @@ Template.rowTotalCell.helpers({
 
   }
 });
+
+Template.discountCell.events({
+
+});

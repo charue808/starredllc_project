@@ -145,10 +145,12 @@ Meteor.methods({
       status:"In progress",
       publisherId: pubId,
     }, {
+      $set: {
       publisherId: pubId,
       status: "In progress",
       submitted: new Date(),
       booksOrdered: bksOrdered
+      }
     });
   }
 

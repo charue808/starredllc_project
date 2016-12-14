@@ -17,6 +17,11 @@ body {
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
+.login {
+  margin-top: 15px;
+  margin-right: 175px;
+}
+
 footer {
   position: absolute;
   right: 0;

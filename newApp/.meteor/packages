@@ -36,5 +36,4 @@ momentjs:moment
 msavin:mongol
 alanning:roles
 accounts-password
-ian:accounts-ui-bootstrap-3
-stylus
+accounts-ui

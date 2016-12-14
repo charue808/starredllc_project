@@ -125,7 +125,7 @@ Template.addQTYCell.events({
     let price = bookDetail.listPrice;
     console.log("the price for this for is", price);
     let numPrice = price.replace(/[^0-9\.]+/g, "");
-    console.log("this is the list price with out string", numPrice);
+    console.log("this is the list price without string", numPrice);
     let bookTotal = Number(qty) * Number(numPrice);
     console.log("this is the result of qty and listPrice", bookTotal);
     console.log("this is the book total to add:", bookTotal);
@@ -152,5 +152,20 @@ Template.rowTotalCell.helpers({
 });
 
 Template.discountCell.events({
+  'keydown #discountInputBox': function(event) {
+    // experiment to get value from input on enter keypress
+    if(event.which === 13) {
+      let bookId = this._id;
+      let currentBook = booksOrderedTemp[bookId];
 
+      console.log('this is the book id', currentBook);
+      let price = currentBook.listPrice;
+      console.log("this is the list price", price);
+      let formatPrice = price.replace(/[^0-9\.]+/g, "");
+      var text = event.currentTarget.value;
+      console.log("this is the text in the box", text);
+      let discountedPrice = Number(formatPrice) - Number(text);
+      console.log("this is the price with discount", discountedPrice.toFixed(2));
+    }
+  }
 });

@@ -1,5 +1,6 @@
 <template name="uploadAdmin">
   <div class="container">
+    {{#if isInRole 'admin'}}
     <div class="row">
       <div class="col-md-12">
         <h1>Upload Publisher Catalog</h1>
@@ -17,5 +18,10 @@
         {{/unless}}
       </div>
     </div>
+    {{else}}
+    <div class="jumbotron">
+      <h1>Access Denied</h1>
+    </div>
+    {{/if}}
   </div>
 </template>

@@ -1,3 +1,8 @@
+import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { Accounts } from 'meteor/accounts-base';
+import { Template } from 'meteor/templating';
+
+
 Template.uploadAdmin.onCreated( () => {
 	Template.instance().uploading = new ReactiveVar( false );
 });

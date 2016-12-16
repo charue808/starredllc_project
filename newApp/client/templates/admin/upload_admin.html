@@ -1,6 +1,5 @@
 <template name="uploadAdmin">
   <div class="container">
-    {{#if isInRole 'admin'}}
     <div class="row">
       <div class="col-md-12">
         <h1>Upload Publisher Catalog</h1>
@@ -10,7 +9,7 @@
       <div class="col-md-6">
         {{#unless uploading}}
           <input type="file" name="uploadPublisherCatalogCSV">
-        {{else}}
+          {{else}}
           <p>
             <i class="fa fa-spin fa-refresh"></i>
             Uploading File....
@@ -18,10 +17,5 @@
         {{/unless}}
       </div>
     </div>
-    {{else}}
-    <div class="jumbotron">
-      <h1>Access Denied</h1>
-    </div>
-    {{/if}}
   </div>
 </template>

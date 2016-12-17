@@ -4,7 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
-import { $ } from 'meteor/jquery';
+//import { $ } from 'meteor/jquery';
 import dataTablesBootstrap from 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
 dataTablesBootstrap(window, $);
@@ -55,7 +55,7 @@ Template.editOrderContextSet.helpers({
 */
 
 Template.editOrder.helpers({
-  selector() {
+  selectorHelper() {
 
     publisherIdTemp = FlowRouter.getQueryParam("publisherId");
 
@@ -75,8 +75,20 @@ Template.editOrder.helpers({
 
     //booksOrderTemp = {};
     }
+if ($('#emptyRows').prop('checked')){
+  console.log("right now, booksOrderedTemp is ", booksOrderedTemp);
 
-    return { publisher: currentOrder.publisherId };
+  var booksOrderedArray = [];
+  for(var bookId in booksOrderedTemp){
+    booksOrderedArray.push(bookId);
+  }
+
+    return { publisher: currentOrder.publisherId, _id: {$in: booksOrderedArray}};
+
+}
+else {
+   return { publisher: currentOrder.publisherId };
+}
   }
 });
 

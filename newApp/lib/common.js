@@ -20,9 +20,9 @@ new Tabular.Table({
     {data: "guidedReading", title:"Guided Reading", width:"5%"},
     {data: "listPrice", title: "List Price", width:"10%"},
     {data: "yourPrice", title: "Your Price", width:"10%"},
-    {title: "Quantity", tmpl: Meteor.isClient && Template.addQTYCell, width:"15%"},
+    {title: "Quantity", tmpl: Meteor.isClient && Template.addQTYCell, width:"5%"},
     {title: "Net Total", tmpl: Meteor.isClient && Template.rowTotalCell, width:"20%"},
-    {title: "Discount", tmpl: Meteor.isClient && Template.discountCell, width:"10%"}
+    {title: "Discount", tmpl: Meteor.isClient && Template.discountCell, width:"5%"}
   ],
   stateSave: true,
   responsive: true,

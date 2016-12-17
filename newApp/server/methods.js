@@ -150,6 +150,9 @@ Meteor.methods({
       submitted: new Date(),
       booksOrdered: bksOrdered
     });
-  }
+  },
 
+  accountUpdate(userId, orgName) {
+    Meteor.users.update({_id:userId}, {$set: {"profile.org": orgName}});
+  }
 });

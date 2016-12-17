@@ -1,0 +1,63 @@
+<template name="updateAccount">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Update Your Account</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <form class="form-horizontal">
+      <h2>Contact information</h2>
+      <div class="form-group">
+        <label for="inputfullName" class="col-md-2 control-label">Full Name</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="inputfullName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputOrgName" class="col-md-2 control-label">Organization/Institution</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="inputOrgName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inptTelNum" class="col-md-2 control-label">Telephone Number</label>
+        <div class="col-md-3">
+          <input type="tel" class="form-control" id="inputTelNum">
+        </div>
+        <label for="inptFaxNum" class="col-md-2 control-label">Fax Number</label>
+        <div class="col-md-3">
+          <input type="tel" class="form-control" id="inputTelNum">
+        </div>
+      </div>
+      <h2>Shipping Address</h2>
+      <div class="form-group">
+        <label for="inputAddress" class="col-md-2 control-label">Address </label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="inputAddress">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddressCity" class="col-md-2 control-label">City</label>
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="inputAddressCity">
+        </div>
+        <label for="inputAddressState" class="col-md-1 control-label">State</label>
+        <div class="col-md-1">
+          <input type="text" class="form-control" id="inputAddressState">
+        </div>
+        <label for="inputAddressZip" class="col-md-1 control-label">Zip code</label>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="inputAddressZip">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a class="padleft" href="#" data-action="homeRoute">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

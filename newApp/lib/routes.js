@@ -5,6 +5,12 @@ FlowRouter.route('/', {
   }
 });
 
+FlowRouter.route('/account/update', {
+  name: 'update-account',
+  action() {
+    BlazeLayout.render('layout', { content: 'updateAccount'})
+  }
+});
 
 
 FlowRouter.route('/create-order', {

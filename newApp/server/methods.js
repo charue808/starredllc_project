@@ -152,7 +152,7 @@ Meteor.methods({
     });
   },
 
-  accountUpdate(userId, orgName) {
-    Meteor.users.update({_id:userId}, {$set: {"profile.org": orgName}});
+  accountUpdate(userId, profileData) {
+    Meteor.users.update({_id:userId}, {$set: {"profile": profileData}});
   }
 });

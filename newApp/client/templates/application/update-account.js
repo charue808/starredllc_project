@@ -2,13 +2,25 @@ Template.updateAccount.events({
   'submit form': function(e) {
     e.preventDefault();
     console.log('click button');
-    
-    let orgName = $(e.target).find('#inputOrgName').val();
-    console.log("this is the org:",orgName);
+
+    let newProfile = {
+      fullName: $(e.target).find('#inputfullName').val(),
+      org: $(e.target).find('#inputOrgName').val(),
+      tel: $(e.target).find('#inputTelNum').val(),
+      fax: $(e.target).find('#inputFaxNum').val(),
+      address: {
+        street: $(e.target).find('#inputAddressStr').val(),
+        city: $(e.target).find('#inputAddressCity').val(),
+        state: $(e.target).find('#inputAddressState').val(),
+        zip: $(e.target).find('#inputAddressZip').val(),
+      }
+    };
+
+    console.log("this is the profile:", newProfile);
     let user = Meteor.userId();
     console.log("who is the user:", user);
 
-    Meteor.call('accountUpdate', user, orgName, function(error, result) {
+    Meteor.call('accountUpdate', user, newProfile, function(error, result) {
       if (error) {
         console.log(error.reason);
       } else {

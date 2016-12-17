@@ -2,7 +2,8 @@ import Tabular from 'meteor/aldeed:tabular';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
-import { Session } from 'meteor/session';
+import { ReactiveDict } from 'meteor/reactive-dict';
+
 
 //import { $ } from 'meteor/jquery';
 import dataTablesBootstrap from 'datatables.net-bs';
@@ -54,6 +55,10 @@ Template.editOrderContextSet.helpers({
 });
 */
 
+Template.editOrder.onCreated(function templateOnCreated() {
+  this.state = new ReactiveDict();
+});
+
 Template.editOrder.helpers({
   selectorHelper() {
 
@@ -75,20 +80,21 @@ Template.editOrder.helpers({
 
     //booksOrderTemp = {};
     }
-if ($('#emptyRows').prop('checked')){
-  console.log("right now, booksOrderedTemp is ", booksOrderedTemp);
 
-  var booksOrderedArray = [];
-  for(var bookId in booksOrderedTemp){
-    booksOrderedArray.push(bookId);
-  }
+    const instance = Template.instance();
+    if (instance.state.get('hideUnorderedBooks')) {
+      console.log("right now, booksOrderedTemp is ", booksOrderedTemp);
 
-    return { publisher: currentOrder.publisherId, _id: {$in: booksOrderedArray}};
-
-}
-else {
-   return { publisher: currentOrder.publisherId };
-}
+      var booksOrderedArray = [];
+      for(var bookId in booksOrderedTemp){
+        booksOrderedArray.push(bookId);
+      }
+        //return books in an order that thave a quantity by publisherId
+        return { publisher: currentOrder.publisherId, _id: {$in: booksOrderedArray}};
+    } else {
+      // return all books with publisher selector
+      return { publisher: currentOrder.publisherId };
+    }
   }
 });
 
@@ -103,7 +109,10 @@ Template.editOrder.events({
         Bert.alert('Your order has been saved!', 'success', 'fixed-bottom');
       }
     });
-  }
+  },
+  'change .hideUnorderedBooks input'(event, instance) {
+    instance.state.set('hideUnorderedBooks', event.target.checked);
+  },
 });
 
 Template.addQTYCell.helpers({

@@ -38,3 +38,4 @@ twbs:bootstrap
 useraccounts:flow-routing
 useraccounts:bootstrap
 jquery
+reactive-dict

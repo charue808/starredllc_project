@@ -4,8 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-
-//import { $ } from 'meteor/jquery';
+import { $ } from 'meteor/jquery';
 import dataTablesBootstrap from 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
 dataTablesBootstrap(window, $);
@@ -18,9 +17,10 @@ import './edit-order.html';
 
 // Global Variables
   //Books Ordered
-  var booksOrderedTemp = {};
+  booksOrderedTemp = {};
   var currentOrder;
   var publisherIdTemp;
+  var discountCellChanging = false;
 /*
 // Set Context for orderId
 Template.editOrderContextSet.onRendered(function() {
@@ -54,6 +54,21 @@ Template.editOrderContextSet.helpers({
   }
 });
 */
+/*
+function calcNetPrice(user) {
+  let loggedInUser = Meteor.user();
+
+  if (Roles.userIsInRole(loggedInUser, ['admin'])) {
+    console.log("This is the admin logged in");
+    let price = bookDetail.listPrice;
+    return price;
+  } else {
+    let price = bookDetail.yourPrice;
+    console.log("this is not the admin");
+    return price;
+  }
+}
+*/
 
 Template.editOrder.onCreated(function templateOnCreated() {
   this.state = new ReactiveDict();
@@ -63,8 +78,8 @@ Template.editOrder.helpers({
   selectorHelper() {
 
     publisherIdTemp = FlowRouter.getQueryParam("publisherId");
-
-    currentOrder = Orders.findOne({status: "In progress", publisherId: publisherIdTemp });
+    userIdTemp = Meteor.userId();
+    currentOrder = Orders.findOne({status: "In progress", publisherId: publisherIdTemp, userId:userIdTemp });
     //Session.set('currentOrderIdSessionVar', "");
     if(currentOrder)
     {
@@ -73,12 +88,12 @@ Template.editOrder.helpers({
     }
     else
     {
-    currentOrder = {status:"Pending", publisherId: publisherIdTemp};
+    currentOrder = {status:"Pending", publisherId: publisherIdTemp, userId: userIdTemp};
     //currentOrder = Orders.findOne({status: "In progress", publisherId: publisherIdTemp });
 
     console.log("Didn't find a current order:", currentOrder);
 
-    //booksOrderTemp = {};
+    booksOrderedTemp = {};
     }
 
     const instance = Template.instance();
@@ -101,92 +116,178 @@ Template.editOrder.helpers({
 Template.editOrder.events({
   'click #saveOrderBtn': function() {
     console.log("clicked");
-    Meteor.call('createOrder', publisherIdTemp, booksOrderedTemp, (error, response) => {
-      if (error) {
-        console.log("what is the error:", error)
-      } else {
-        console.log("Success", response)
-        Bert.alert('Your order has been saved!', 'success', 'fixed-bottom');
-      }
-    });
+    if (!discountCellChanging) {
+      Meteor.call('createOrder', publisherIdTemp, userIdTemp, booksOrderedTemp, (error, response) => {
+        if (error) {
+          console.log("what is the error:", error)
+        } else {
+          console.log("Success", response)
+          Bert.alert('Your order has been saved!', 'success', 'fixed-bottom');
+        }
+      });
+    }
   },
   'change .hideUnorderedBooks input'(event, instance) {
     instance.state.set('hideUnorderedBooks', event.target.checked);
   },
 });
 
+/*
 Template.addQTYCell.helpers({
   currentQty() {
     let bookId = this._id;
     let currentBook = booksOrderedTemp[bookId];
 
     if(currentBook){
-      console.log("The value of this is:", currentBook.qty);
+      //console.log("The value of this is:", currentBook.qty);
       return booksOrderedTemp[bookId].qty;
     }
 
   }
 });
-
+*/
+/*
 // User can add/update quantity of items added to order
 Template.addQTYCell.events({
   'change .qtyBox': function() {
-
+    if(!booksOrderedTemp) {
+      booksOrderedTemp = {};
+    }
+    if(!booksOrderedTemp[this._id]) {
+      booksOrderedTemp[this._id] = Catalogs.findOne(this._id);
+    }
     console.log("there was a change!");
 
     var inputBoxSelector = "#qtyEntered-" + this._id;
     var inputBoxQty = $(inputBoxSelector).val();
-    console.log("Quantity Entered is: ", inputBoxQty);
+    //console.log("Quantity Entered is: ", inputBoxQty);
 
-    let bookDetail = Catalogs.findOne(this._id);
-    bookDetail.qty = inputBoxQty;
-    console.log("Row Data is:", bookDetail);
+
+    booksOrderedTemp[this._id].qty = inputBoxQty;
+    //console.log("Row Data is:", bookDetail);
     //booksOrdered = bookDetail[this._id];
-    let qty = bookDetail.qty;
-    let price = bookDetail.listPrice;
-    console.log("the price for this for is", price);
-    let numPrice = price.replace(/[^0-9\.]+/g, "");
-    console.log("this is the list price without string", numPrice);
-    let bookTotal = Number(qty) * Number(numPrice);
-    console.log("this is the result of qty and listPrice", bookTotal);
-    console.log("this is the book total to add:", bookTotal);
-    bookDetail.netTotal = bookTotal.toFixed(2);
+    var userPriceSelector = '#userPrice-' + this._id;
+    //console.log("Price Selector", userPriceSelector);
+    var userPrice = $(userPriceSelector).text();
+    //console.log('The price for the user is', userPrice);
 
-    booksOrderedTemp[this._id] = bookDetail;
+
+    let price = userPrice;
+    let qty = inputBoxQty;
+
+    //console.log("the price for this for is", price);
+    let numPrice = price.replace(/[^0-9\.]+/g, "");
+    //console.log("this is the list price without string", numPrice);
+    booksOrderedTemp[this._id].selectedPrice = numPrice;
+    let bookTotal = Number(qty) * Number(numPrice);
+    //console.log("this is the result of qty and listPrice", bookTotal);
+    //console.log("this is the book total to add:", bookTotal);
+    booksOrderedTemp[this._id].netTotal = bookTotal.toFixed(2);
     console.log("these are the books ordered", booksOrderedTemp);
   }
 });
-
+*/
+/*
 Template.rowTotalCell.helpers({
-  rowTotal() {
+  netTotal() {
     let bookId = this._id;
     let currentBook = booksOrderedTemp[bookId];
 
     if (currentBook) {
-      console.log("the total for this book is:", currentBook.netTotal);
-      let num = booksOrderedTemp[bookId].netTotal;
+      let discount = currentBook.discount;
+      if (!discount) {
+        discount = 0;
+      }
+      //console.log("the discount for this book is:", discount);
+      let price = currentBook.selectedPrice;
+      //console.log("the user price for this book is:", price);
+      let qty = currentBook.qty;
+      //console.log("the qty for this book is:", qty);
+      let newPrice = Number(price * (1 - discount / 100));
+      let formatNewPrice = newPrice;//.toFixed(2);
+      //console.log("this is the new price", formatNewPrice);
+      let newTotal = formatNewPrice * Number(qty);
+      //console.log("this is the new total variable", newTotal);
+      let formatNewTotal = newTotal.toFixed(2);
+      //console.log("this is the new total with discount:", formatNewTotal);
+      currentBook.netTotal = formatNewTotal;
+      let num = currentBook.netTotal;
+
       let total = '$' + num;
       return total;
     }
 
   }
 });
-
+*/
+/*
 Template.discountCell.events({
-  'keydown #discountInputBox': function(event) {
-    // experiment to get value from input on enter keypress
-    if(event.which === 13) {
-      let bookId = this._id;
-      let currentBook = booksOrderedTemp[bookId];
+  'mouseenter #discountInputBox': function(e, template) {
+      e.preventDefault();
+      discountCellChanging = true;
+      //console.log("this cell is changing", discountCellChanging);
+      let discountAmt = template.find('#discountInputBox').value;
+      //console.log("this is the discount amount:", discountAmt);
 
-      console.log('this is the book id', currentBook);
-      let price = currentBook.listPrice;
-      console.log("this is the list price", price);
-      let formatPrice = price.replace(/[^0-9\.]+/g, "");
-      var text = event.currentTarget.value;
-      console.log("this is the text in the box", text);
-      let discountedPrice = Number(formatPrice) - Number(text);
-      console.log("this is the price with discount", discountedPrice.toFixed(2));
+  },
+  'keypress #discountInputBox': function(e, template) {
+    if(event.which === 13){
+      e.preventDefault();
+    }
+      discountCellChanging = true;
+      //console.log("this cell is changing", discountCellChanging);
+      let discountAmt = template.find('#discountInputBox').value;
+      //console.log("this is the discount amount:", discountAmt);
+
+      // save values to booksOrderedTemp
+      booksOrderedTemp[this._id].discount = discountAmt;
+      discountCellChanging = false;
+      console.log("this cell is changing", discountCellChanging);
+
+
+  },
+  'mouseleave #discountInputBox': function(e, template) {
+      //save values to booksOrderedTemp
+      let discountAmt = template.find('#discountInputBox').value;
+      if (booksOrderedTemp[this._id]) {
+        booksOrderedTemp[this._id].discount = discountAmt;
+        discountCellChanging = false;
+      } else {
+        Bert.alert('Please enter a quantity', 'error', 'growl-top-right');
+      }
+  },
+
+});
+*/
+/*
+Template.discountCell.helpers({
+  currentDiscount() {
+    let bookId = this._id;
+    let currentBook = booksOrderedTemp[bookId];
+
+    if (currentBook) {
+      return currentBook.discount;
     }
   }
 });
+*/
+/*
+Template.priceCell.helpers({
+  netPrice() {
+    let bookId = this._id;
+    let bookDetail = Catalogs.findOne(bookId);
+    let loggedInUser = Meteor.user();
+
+    if (Roles.userIsInRole(loggedInUser, ['public-schools', 'private-schools'])) {
+      //console.log("The user is from the public or private schools");
+      let price = bookDetail.listPrice;
+      return price;
+    } else if(Roles.userIsInRole(loggedInUser, ['military', 'state-library'])) {
+      let price = bookDetail.yourPrice;
+      //console.log("the user is military or state library");
+      return price;
+    }
+
+  }
+});
+*/

@@ -140,12 +140,14 @@ Meteor.methods({
     }
   },
 
-  createOrder(pubId, bksOrdered) {
+  createOrder(pubId, userId, bksOrdered) {
     Orders.upsert({
       status:"In progress",
       publisherId: pubId,
+      userId: userId
     }, {
       publisherId: pubId,
+      userId: userId,
       status: "In progress",
       submitted: new Date(),
       booksOrdered: bksOrdered

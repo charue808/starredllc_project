@@ -5,6 +5,7 @@ import { Template } from 'meteor/templating';
 import moment from 'meteor/momentjs:moment';
 import { Meteor } from 'meteor/meteor';
 import { Catalogs } from '../lib/collections/catalogs.js';
+import { Orders } from '../lib/collections/orders.js';
 
 
 new Tabular.Table({
@@ -24,6 +25,26 @@ new Tabular.Table({
     {title: "Quantity", tmpl: Meteor.isClient && Template.addQTYCell, width:"5%"},
     {title: "Net Total", tmpl: Meteor.isClient && Template.rowTotalCell, width:"5%"},
     {title: "Discount (%)", tmpl: Meteor.isClient && Template.discountCell, width:"20%"}
+  ],
+  stateSave: true,
+  responsive: true,
+  autoWidth: false,
+  search: {
+    smart: true,
+    onEnterOnly: false,
+  }
+});
+
+new Tabular.Table({
+  name: "Orders",
+  collection: Orders,
+  columns: [
+    {data: "customerName", title: "School", class:"col-md-1"},
+    {data: "publisherId", title: "Publisher", class:"col-md-1"},
+    {data: "status", title: "Status", class:"col-md-1"},
+    {data: "submitted", title: "Last Update", class:"col-md-3"},
+    {title: "Actions:", tmpl: Meteor.isClient && Template.actionCell},
+    //{title: "Complete Order", tmpl: Meteor.isClient && Template.statusToCompleteCell}
   ],
   stateSave: true,
   responsive: true,

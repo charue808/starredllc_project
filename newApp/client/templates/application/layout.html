@@ -2,7 +2,11 @@
   {{> header}}
 
   <main>
-    {{> Template.dynamic template=content}}
+    {{#if Template.subscriptionsReady}}
+      {{> Template.dynamic template=content}}
+    {{else}}
+      loading...
+    {{/if}}
   </main>
 
   {{> footer}}

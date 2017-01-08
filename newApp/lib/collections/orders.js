@@ -2,16 +2,16 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Orders = new Mongo.Collection('orders');
-/*
-Orders.allow({
-  update: function() {
-    return true;
-  }
-});
 
 
 Orders.schema = new SimpleSchema({
   publisherId: {
+    type: String
+  },
+  customerId: {
+    type: String
+  },
+  customerName: {
     type: String
   },
   status: {
@@ -21,9 +21,9 @@ Orders.schema = new SimpleSchema({
     type: Date
   },
   booksOrdered: {
-    type: [Object]
+    type: Object,
+    blackbox: true
   }
 });
 
 Orders.attachSchema(Orders.schema);
-*/

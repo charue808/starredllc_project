@@ -12,6 +12,13 @@ FlowRouter.route('/account/update', {
   }
 });
 
+FlowRouter.route('/admin/view-orders', {
+  name: 'view_orders_admin',
+  action() {
+    BlazeLayout.render('layout', {content: 'viewOrdersAdmin'})
+  }
+});
+
 
 FlowRouter.route('/create-order', {
   name: 'create-order',
@@ -35,7 +42,7 @@ FlowRouter.route('/view-orders', {
   }
 });
 
-FlowRouter.route('/upload', {
+FlowRouter.route('/admin/upload', {
   name: 'upload',
   action() {
     BlazeLayout.render('layout', { content: 'uploadAdmin'})

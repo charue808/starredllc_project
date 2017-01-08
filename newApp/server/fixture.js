@@ -47,7 +47,7 @@ if (Meteor.isServer) {
 
       if (!userExists) {
         const userId = Accounts.createUser({username, email, password});
-        Roles.addUsersToRoles(userId, roles);
+        Roles.addUsersToRoles(userId, roles, 'customers');
       }
     });
 

@@ -1,3 +1,4 @@
+/*
 import Tabular from 'meteor/aldeed:tabular';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -76,3 +77,4 @@ Template.addQTYCell.events({
     console.log("these are the books ordered", booksOrderedTemp);
   }
 });
+*/

@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { Catalogs } from '../lib/collections/catalogs.js';
 import { Orders } from '../lib/collections/orders.js';
 
@@ -138,22 +139,61 @@ Meteor.methods({
         console.warn( 'Rejected. Invalid Entry.' );
       }
     }
-  },
-
-  createOrder(pubId, userId, bksOrdered) {
+  }
+/*
+  createOrder(pubId, user, bksOrdered) {
     Orders.upsert({
       status:"In progress",
       publisherId: pubId,
-      userId: userId
+      userId: user._id,
+      user: user.username
     }, {
       publisherId: pubId,
-      userId: userId,
+      userId: user._id,
+      user: user.username,
       status: "In progress",
       submitted: new Date(),
       booksOrdered: bksOrdered
     });
   },
 
+  accountUpdate(userId, profileData) {
+    Meteor.users.update({_id:userId}, {$set: {"profile": profileData}});
+  }
+*/
+});
+
+//create order method: create order or update existing order on click save button
+Meteor.methods({
+  upsertOrder(pubId, custId, custName, bksOrdered) {
+    check(pubId, String);
+    check(custId, String);
+    check(custName, String);
+    check(bksOrdered, Object);
+
+    //console.log(bksOrdered);
+//changed from upsert to update with upsert set to true
+    Orders.upsert({
+      status: "In progress",
+      publisherId: pubId,
+      customerId: custId //add back comma
+      //customerName: custName
+    },
+    {$set:
+      {
+        publisherId: pubId,
+        customerId: custId,
+        customerName: custName,
+        submitted: new Date(),
+        booksOrdered: bksOrdered
+      }
+    });
+
+  }
+});
+
+// update account information
+Meteor.methods({
   accountUpdate(userId, profileData) {
     Meteor.users.update({_id:userId}, {$set: {"profile": profileData}});
   }

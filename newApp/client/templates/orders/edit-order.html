@@ -2,9 +2,10 @@
   <div class="container-fluid">
     <!-- Provide editOrder template with context, which comes
          directly from order document from Orders collection -->
-
-      {{> Template.dynamic template="editOrder"}}
-
+      {{#if Template.subscriptionsReady}}
+        {{> Template.dynamic template="editOrder"}}
+      {{else}}
+      {{/if}}
   </div>
 </template>
 
@@ -32,4 +33,34 @@
   <div class="container-fluid">
     {{> tabular table=TabularTables.Catalogs id="catalogtableid" selector=selectorHelper class="table table-striped table-bordered table-condensed"}}
   </div>
+</template>
+
+<template name="addQTYCell">
+  <form class="form-inline">
+    <div class="form-group">
+      <input type="number" class="form-control qtyBox" id="qtyEntered-{{_id}}" value={{currentQty}}>
+    </div>
+  </form>
+</template>
+
+<template name="discountCell">
+  <form class="form-inline">
+    {{#if isInRole 'admin' 'customers'}}
+    <div class="form-group">
+      <input type="text" class="form-control" id="discountInputBox" value={{currentDiscount}}>
+    </div>
+    {{else}}
+    <div class="form-group">
+      <input type="text" class="form-control" id="discountInputBox" value={{currentDiscount}} readonly>
+    </div>
+    {{/if}}
+  </form>
+</template>
+
+<template name="rowTotalCell">
+  <b>{{netTotal}}</b>
+</template>
+
+<template name="priceCell">
+  <b id="userPrice-{{_id}}">{{netPrice}}</b>
 </template>

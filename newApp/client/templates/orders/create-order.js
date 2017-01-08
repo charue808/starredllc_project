@@ -14,9 +14,13 @@ Template.createOrder.events({
       let publisherId = selectedPublisher;
       // Route to edit order contexts
       // Example: FlowRouter.go('/blog/my-post?comments=on&color=dark');
-
+      let currentUser = Meteor.user();
+      //console.log(currentUser);
+      let customerId = currentUser._id;
+      console.log("this is the currentUser", customerId);
+      let customerName = currentUser.username;
       //FlowRouter.go('/blog/my-post?comments=on&color=dark');
-      FlowRouter.go('/edit-order?publisherId='+publisherId);
+      FlowRouter.go('/edit-order?publisherId=' + publisherId + '&customerId=' + customerId + '&customerName=' + customerName); 
       // set template with parameter of publisherId
     }
 

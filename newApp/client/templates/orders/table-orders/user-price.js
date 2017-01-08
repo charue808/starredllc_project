@@ -1,3 +1,5 @@
+/*
+
 import Tabular from 'meteor/aldeed:tabular';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -41,3 +43,4 @@ Template.priceCell.helpers({
 
   }
 });
+*/

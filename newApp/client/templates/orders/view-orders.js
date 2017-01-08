@@ -9,8 +9,8 @@ import './view-orders.html';
 
 Template.viewOrders.helpers({
   ordersInProgress() {
-    let user = Meteor.userId();
-    return Orders.find({'status':'In progress', 'userId':user}, {sort: {submitted: -1}});
+    let customer = Meteor.user();
+    return Orders.find({'status':'In progress', 'customerId':customer._id, 'customerName': customer.username}, {sort: {submitted: -1}});
   }
 });
 
@@ -19,7 +19,7 @@ Template.orderItem.events({
     console.log('clicked! edit order button');
     let order = Orders.findOne(this._id);
     console.log('this is the publisherId', order.publisherId);
-    FlowRouter.go('/edit-order?publisherId='+order.publisherId);
+    FlowRouter.go('/edit-order?publisherId='+ order.publisherId + '&customerId=' + order.customerId +'&customerName='+ order.customerName);
   }
 });
 

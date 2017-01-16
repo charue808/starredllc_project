@@ -1,21 +1,83 @@
 <template name="uploadAdmin">
-  <div class="container">
+  <div class="container mb">
     <div class="row">
       <div class="col-md-12">
         <h1>Upload Publisher Catalog</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        {{#unless uploading}}
-          <input type="file" name="uploadPublisherCatalogCSV">
-          {{else}}
-          <p>
-            <i class="fa fa-spin fa-refresh"></i>
-            Uploading File....
-          </p>
-        {{/unless}}
+     <div class="col-md-6">
+       {{#unless uploading}}
+         <input type="file" name="uploadPublisherCatalogCSV">
+         {{else}}
+         <p>
+           <i class="fa fa-spin fa-refresh"></i>
+           Uploading File....
+         </p>
+       {{/unless}}
+     </div>
+   </div>
+  </div>
+  <div class="container mt">
+    <form id="publisherDetails" class="form-horizontal">
+      <h2>Publisher Information</h2>
+      <div class="form-group">
+        <label for="inputPublisherId" class="col-md-2 control-label">Publisher Id</label>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="inputPublisherId">
+        </div>
+        <label for="inputDoeNum" class="col-md-1 control-label">DOE #</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="inputDoeNum">
+        </div>
       </div>
-    </div>
+      <div class="form-group">
+        <label for="inputPublisherName" class="col-md-2 control-label">Name</label>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="inputPublisherName">
+        </div>
+        <label for="inputEmail" class="col-md-1 control-label">Email</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="inputEmail">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputTelNum" class="col-md-2 control-label">Tel.</label>
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="inputTelNum">
+        </div>
+        <label for="inputFaxNum" class="col-md-1 control-label">Fax</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="inputFaxNum">
+        </div>
+      </div>
+      <h2>Address</h2>
+      <div class="form-group">
+        <label for="inputAddressStr" class="col-md-2 control-label">Address </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="inputAddressStr">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddressCity" class="col-md-2 control-label">City</label>
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="inputAddressCity">
+        </div>
+        <label for="inputAddressState" class="col-md-1 control-label">State</label>
+        <div class="col-md-1">
+          <input type="text" class="form-control" id="inputAddressState">
+        </div>
+        <label for="inputAddressZip" class="col-md-2 control-label">Zip code</label>
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="inputAddressZip">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a class="padleft" href="#" data-action="homeRoute">Cancel</a>
+        </div>
+      </div>
+    </form>
   </div>
 </template>

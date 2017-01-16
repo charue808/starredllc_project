@@ -35,5 +35,35 @@ Template.uploadAdmin.events({
 				});
 			}
 		});
-	}
+	},
+  'submit #publisherDetails'(e, templ) {
+    e.preventDefault();
+
+    let details = {
+      publisherId: $(e.target).find('#inputPublisherId').val(),
+      doeNum: $(e.target).find('#inputDoeNum').val(),
+      name: $(e.target).find('#inputPublisherName').val(),
+      tele: $(e.target).find('#inputTelNum').val(),
+      fax: $(e.target).find('#inputFaxNum').val(),
+      email: $(e.target).find('#inputEmail').val(),
+      address:{
+        street: $(e.target).find('#inputAddressStr').val(),
+        city: $(e.target).find('#inputAddressCity').val(),
+        state: $(e.target).find('#inputAddressState').val(),
+        zip: $(e.target).find('#inputAddressZip').val()
+      }
+
+    };
+
+    console.log("these are the details to input: ", details);
+    Meteor.call('updatePublisherDetails', details, function(error, results) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(results);
+        Bert.alert('Publisher Details updated', 'success', 'growl-top-right');
+        $('#publisherDetails')[0].reset();
+      }
+    });
+  }
 });

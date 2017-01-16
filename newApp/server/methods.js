@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Catalogs } from '../lib/collections/catalogs.js';
 import { Orders } from '../lib/collections/orders.js';
+import { PublisherDetails } from '../lib/collections/publisherDetails.js';
 
 Meteor.methods({
   parseUpload( data, fileName ) {
@@ -196,5 +197,32 @@ Meteor.methods({
 Meteor.methods({
   accountUpdate(userId, profileData) {
     Meteor.users.update({_id:userId}, {$set: {"profile": profileData}});
+  }
+});
+
+Meteor.methods({
+  updatePublisherDetails(publisherDetails) {
+
+
+    PublisherDetails.upsert({
+      publisherId: publisherDetails.publisherId,
+    },
+    {$set:
+      {
+        publisherId: publisherDetails.publisherId,
+        doeNum: publisherDetails.doeNum,
+        name: publisherDetails.name,
+        tele: publisherDetails.tele,
+        fax: publisherDetails.fax,
+        email: publisherDetails.email,
+        address: {
+          street: publisherDetails.address.street,
+          city: publisherDetails.address.city,
+          state: publisherDetails.address.state,
+          zip: publisherDetails.address.zip
+        }
+      }
+    });
+
   }
 });

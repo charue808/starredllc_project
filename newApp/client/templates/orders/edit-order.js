@@ -222,13 +222,13 @@ Template.priceCell.helpers({
     let bookDetail = Catalogs.findOne(bookId);
     let loggedInUser = Meteor.user();
     if (Roles.userIsInRole(loggedInUser, ['admin'], 'customers')) {
-      console.log("i am the admin");
+      //console.log("i am the admin");
       let bookId = this._id;
       let currentBook = booksOrderedTemp[bookId];
       if (!currentBook) {
         return
       }
-      console.log("I am the admin and this is the currentBook", currentBook);
+      //console.log("I am the admin and this is the currentBook", currentBook);
       let price = currentBook.selectedPrice;
       return price;
       //console.log("this is the customer id for this order:", customerId);

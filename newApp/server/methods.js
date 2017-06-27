@@ -202,7 +202,7 @@ Meteor.methods({
 
 Meteor.methods({
   updatePublisherDetails(publisherDetails) {
-
+    check(publisherDetails, PublisherDetails.schema);
 
     PublisherDetails.upsert({
       publisherId: publisherDetails.publisherId,

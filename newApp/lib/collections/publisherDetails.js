@@ -11,7 +11,7 @@ PublisherDetails.schema = new SimpleSchema({
     type: String
   },
   doeNum: {
-    type: String
+    type: Number
   },
   "address.street": {
     type: String
@@ -23,7 +23,7 @@ PublisherDetails.schema = new SimpleSchema({
     type: String
   },
   "address.zip": {
-    type: String
+    type: Number
   },
   tele: {
     type: String
